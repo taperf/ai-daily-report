@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Daily Pulse</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="noise-overlay"></div>
+    
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="brand">
+                <span class="brand-icon">◉</span>
+                <h1>AI Daily Pulse</h1>
+                <span class="brand-tag">by LiClaw</span>
+            </div>
+            <div class="header-meta">
+                <span class="pulse-dot"></span>
+                <span id="update-time">更新中...</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="tab-nav">
+        <div class="tab-nav-inner">
+            <button class="tab-btn active" data-tab="industry">
+                <span class="tab-emoji">📰</span>
+                <span class="tab-label">行业日报</span>
+                <span class="tab-sub">每日 08:30</span>
+            </button>
+            <button class="tab-btn" data-tab="spread">
+                <span class="tab-emoji">📡</span>
+                <span class="tab-label">传播日报</span>
+                <span class="tab-sub">每日 18:00</span>
+            </button>
+            <button class="tab-btn" data-tab="builders">
+                <span class="tab-emoji">🤖</span>
+                <span class="tab-label">Builders</span>
+                <span class="tab-sub">每日 14:30</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="content-area">
+        <div class="date-selector">
+            <button class="date-arrow" id="date-prev">←</button>
+            <span class="date-display" id="current-date">2026年5月7日</span>
+            <button class="date-arrow" id="date-next">→</button>
+        </div>
+
+        <div class="tab-content active" id="tab-industry">
+            <article class="digest-card" id="industry-content">
+                <div class="loading-state">加载中...</div>
+            </article>
+        </div>
+
+        <div class="tab-content" id="tab-spread">
+            <article class="digest-card" id="spread-content">
+                <div class="loading-state">加载中...</div>
+            </article>
+        </div>
+
+        <div class="tab-content" id="tab-builders">
+            <article class="digest-card" id="builders-content">
+                <div class="loading-state">加载中...</div>
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>AI Daily Pulse — 每日三份 AI 情报，PR 视角精选</p>
+        <p class="footer-sub">行业动态 · 传播爆文 · Builder 动向 | 数据自动采集，LiClaw 深度分析</p>
+    </footer>
+
+    <script src="js/marked.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

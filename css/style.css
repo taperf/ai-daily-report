@@ -1,0 +1,457 @@
+/* === AI Daily Pulse — Dark Editorial Theme === */
+
+:root {
+    --bg-primary: #0a0a0f;
+    --bg-secondary: #12121a;
+    --bg-card: #16161f;
+    --bg-hover: #1c1c28;
+    --text-primary: #e8e6e3;
+    --text-secondary: #9a9a9a;
+    --text-muted: #5a5a6a;
+    --accent: #4ade80;
+    --accent-dim: #22c55e33;
+    --accent-orange: #fb923c;
+    --accent-blue: #60a5fa;
+    --border: #2a2a3a;
+    --border-light: #1f1f2f;
+    --radius: 12px;
+    --font-sans: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'Space Mono', 'JetBrains Mono', monospace;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-sans);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Noise texture overlay */
+.noise-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    opacity: 0.03;
+    z-index: 9999;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* === Header === */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border-light);
+    backdrop-filter: blur(12px);
+}
+
+.header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand-icon {
+    font-size: 24px;
+    color: var(--accent);
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { opacity: 1; text-shadow: 0 0 8px var(--accent-dim); }
+    50% { opacity: 0.7; text-shadow: 0 0 20px var(--accent); }
+}
+
+.brand h1 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--text-primary);
+}
+
+.brand-tag {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    padding: 2px 8px;
+    background: var(--bg-secondary);
+    border-radius: 4px;
+    border: 1px solid var(--border-light);
+}
+
+.header-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.3); opacity: 0.6; }
+}
+
+/* === Tab Navigation === */
+.tab-nav {
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 57px;
+    z-index: 99;
+}
+
+.tab-nav-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    gap: 0;
+}
+
+.tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 16px 12px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+    transition: all 0.2s;
+    border-bottom: 2px solid transparent;
+}
+
+.tab-btn:hover {
+    background: var(--bg-hover);
+}
+
+.tab-btn.active {
+    border-bottom-color: var(--accent);
+}
+
+.tab-btn.active .tab-label {
+    color: var(--text-primary);
+}
+
+.tab-emoji {
+    font-size: 20px;
+}
+
+.tab-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: color 0.2s;
+}
+
+.tab-sub {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+}
+
+/* === Date Selector === */
+.date-selector {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 24px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.date-arrow {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+}
+
+.date-arrow:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+    border-color: var(--accent);
+}
+
+.date-display {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+    min-width: 140px;
+    text-align: center;
+}
+
+/* === Content Area === */
+.content-area {
+    padding-bottom: 80px;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.digest-card {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+.loading-state {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 60px 0;
+    font-size: 14px;
+}
+
+/* === Markdown Content Styles === */
+.digest-card h1 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--accent);
+    letter-spacing: -0.3px;
+}
+
+.digest-card h2 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-top: 36px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-light);
+    color: var(--text-primary);
+}
+
+.digest-card h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 24px;
+    margin-bottom: 10px;
+    color: var(--accent-blue);
+}
+
+.digest-card p {
+    margin-bottom: 14px;
+    font-size: 14.5px;
+    color: var(--text-primary);
+    line-height: 1.8;
+}
+
+.digest-card strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.digest-card a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-dim);
+    transition: border-color 0.15s;
+}
+
+.digest-card a:hover {
+    border-bottom-color: var(--accent);
+}
+
+.digest-card ul, .digest-card ol {
+    margin-bottom: 14px;
+    padding-left: 20px;
+}
+
+.digest-card li {
+    margin-bottom: 8px;
+    font-size: 14.5px;
+    line-height: 1.7;
+}
+
+.digest-card hr {
+    border: none;
+    height: 1px;
+    background: var(--border);
+    margin: 32px 0;
+}
+
+.digest-card blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 12px 16px;
+    margin: 16px 0;
+    background: var(--accent-dim);
+    border-radius: 0 8px 8px 0;
+    font-size: 13.5px;
+    color: var(--text-secondary);
+}
+
+.digest-card code {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    background: var(--bg-secondary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent-orange);
+}
+
+.digest-card table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 13px;
+}
+
+.digest-card th, .digest-card td {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    text-align: left;
+}
+
+.digest-card th {
+    background: var(--bg-secondary);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+}
+
+/* === News Item Styling (within markdown) === */
+.digest-card p:has(+ p a[href]) {
+    padding: 16px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius);
+    border: 1px solid var(--border-light);
+}
+
+/* === Footer === */
+.site-footer {
+    text-align: center;
+    padding: 40px 24px;
+    border-top: 1px solid var(--border-light);
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.footer-sub {
+    margin-top: 6px;
+    font-size: 11px;
+    color: var(--text-muted);
+    opacity: 0.6;
+}
+
+/* === Responsive === */
+@media (max-width: 640px) {
+    .header-inner {
+        padding: 12px 16px;
+    }
+    
+    .brand h1 {
+        font-size: 16px;
+    }
+    
+    .brand-tag {
+        display: none;
+    }
+    
+    .tab-nav-inner {
+        padding: 0 8px;
+    }
+    
+    .tab-btn {
+        padding: 12px 8px;
+    }
+    
+    .tab-label {
+        font-size: 12px;
+    }
+    
+    .digest-card {
+        padding: 16px;
+    }
+    
+    .digest-card h1 {
+        font-size: 18px;
+    }
+    
+    .digest-card h2 {
+        font-size: 15px;
+    }
+    
+    .digest-card p, .digest-card li {
+        font-size: 14px;
+    }
+}
+
+/* === Scrollbar === */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}
+
+/* === Selection === */
+::selection {
+    background: var(--accent-dim);
+    color: var(--text-primary);
+}
