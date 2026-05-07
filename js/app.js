@@ -131,6 +131,11 @@
             if (!resp.ok) throw new Error('Not found');
             const md = await resp.text();
             container.innerHTML = marked.parse(md);
+            // Make all links open in new tab
+            container.querySelectorAll('a[href]').forEach(a => {
+                a.setAttribute('target', '_blank');
+                a.setAttribute('rel', 'noopener noreferrer');
+            });
         } catch(e) {
             container.innerHTML = `
                 <div class="loading-state">
