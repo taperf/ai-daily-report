@@ -3,6 +3,21 @@
 (function() {
     'use strict';
 
+    // Configure marked: all links open in new tab
+    const renderer = new marked.Renderer();
+    const originalLinkRenderer = renderer.link.bind(renderer);
+    renderer.link = function(href, title, text) {
+        // marked v5+ passes object, older passes positional args
+        if (typeof href === 'object') {
+            const token = href;
+            const html = `<a href="${token.href}" target="_blank" rel="noopener noreferrer"${token.title ? ' title="' + token.title + '"' : ''}>${token.text || token.href}</a>`;
+            return html;
+        }
+        const html = `<a href="${href}" target="_blank" rel="noopener noreferrer"${title ? ' title="' + title + '"' : ''}>${text}</a>`;
+        return html;
+    };
+    marked.setOptions({ renderer: renderer });
+
     // === State ===
     let currentTab = 'industry';
     let currentDate = new Date();
@@ -53,6 +68,15 @@
 
         datePrev.addEventListener('click', () => navigateDate(-1));
         dateNext.addEventListener('click', () => navigateDate(1));
+
+        // Force all links in content area to open in new tab
+        document.querySelector('.content-area').addEventListener('click', (e) => {
+            const link = e.target.closest('a[href]');
+            if (link && !link.getAttribute('target')) {
+                link.setAttribute('target', '_blank');
+                link.setAttribute('rel', 'noopener noreferrer');
+            }
+        });
 
         // Keyboard nav
         document.addEventListener('keydown', (e) => {
